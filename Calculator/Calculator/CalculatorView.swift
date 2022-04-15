@@ -29,7 +29,7 @@ class CalculatorView: UIView {
         let bottomStackView = UIStackView(arrangedSubviews: [CalculatorButton(type: .number, title: ","),
                                                              CalculatorButton(type: .equal)],
                                           axis: .horizontal,
-                                          spacing: 15,
+                                          spacing: K.Numeric.buttonSpacing,
                                           distribution: .fillEqually)
         
         let rowSubviews = [[CalculatorButton(type: .reset),
@@ -54,20 +54,16 @@ class CalculatorView: UIView {
                            
                            [CalculatorButton(type: .number, title: "0"),
                             bottomStackView]]
-        
-        var horizontalStackViews: [UIStackView] = []
-        
-        for row in rowSubviews {
-            let asd = UIStackView(arrangedSubviews: row,
-                                  axis: .horizontal,
-                                  spacing: 15,
-                                  distribution: .fillEqually)
-            horizontalStackViews.append(asd)
+                
+        let horizontalStackViews = rowSubviews.map { UIStackView(arrangedSubviews: $0,
+                                                                 axis: .horizontal,
+                                                                 spacing: K.Numeric.buttonSpacing,
+                                                                 distribution: .fillEqually)
         }
         
         let stackView = UIStackView(arrangedSubviews: horizontalStackViews,
                                     axis: .vertical,
-                                    spacing: 15,
+                                    spacing: K.Numeric.buttonSpacing,
                                     distribution: .fillEqually)
         
         return stackView
@@ -80,11 +76,6 @@ class CalculatorView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
     }
     
 }
@@ -100,18 +91,14 @@ private extension CalculatorView {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            resultLabel.trailingAnchor.constraint(equalTo: calculatorStackView.trailingAnchor,
+                                                  constant: -20),
             resultLabel.bottomAnchor.constraint(equalTo: calculatorStackView.topAnchor,
-                                                constant: -20),
+                                                constant: -30),
             
-            calculatorStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                         constant: 10),
-            calculatorStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                          constant: -10),
             calculatorStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                                         constant: -20),
-//            calculatorStackView.heightAnchor.constraint(equalToConstant: 450),
-//            calculatorStackView.widthAnchor.constraint(equalToConstant: 350)
+            calculatorStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
     

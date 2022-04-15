@@ -11,6 +11,18 @@ class CalculatorButton: UIButton {
     
     private var type: CalculatorButtonType?
     
+    private var isZeroNumber: Bool {
+        customTitleLabel.text == "0" ? true : false
+    }
+    
+    private lazy var customTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 40)
+        label.textColor = type?.design.tintColor
+
+        return label
+    }()
+    
     init(type: CalculatorButtonType, title: String? = nil) {
         super.init(frame: .zero)
         self.type = type
@@ -24,11 +36,10 @@ class CalculatorButton: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if currentTitle != "0" {
+        if isZeroNumber {
+            layer.cornerRadius = K.Numeric.portraitButtonWidthHeight / 2
+        } else {
             layer.cornerRadius = bounds.width / 2
-        }
-        else {
-            layer.cornerRadius = 40
         }
     }
     
@@ -37,13 +48,29 @@ class CalculatorButton: UIButton {
 private extension CalculatorButton {
     
     func setupView() {
-        backgroundColor = type?.superType.backgroundColor
-        tintColor = type?.superType.tintColor
-        setTitleColor(type?.superType.tintColor, for: .normal)
+        backgroundColor = type?.design.backgroundColor
+        tintColor = type?.design.tintColor
+
+        addSubviews([customTitleLabel])
+        setupConstraints()
+    }
+    
+    func setupConstraints() {
+                
+        if isZeroNumber {
+            customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
+                                                      constant: -50).isActive = true
+        } else {
+            customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight).isActive = true
+        }
+        
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 80),
-            widthAnchor.constraint(equalToConstant: 80)
+            customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight),
         ])
+        
     }
     
 }
@@ -52,15 +79,15 @@ extension CalculatorButton {
     
     func setImage(from title: String?) {
         
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: K.Numeric.portraitButtonWidthHeight / 2.5, weight: .bold)
+
         if let title = title {
-            setTitle(title, for: .normal)
-        } else if let image = UIImage(systemName: type?.imageName ?? "") {
+            customTitleLabel.text = title
+        } else if let image = UIImage(systemName: type?.imageName ?? "", withConfiguration: largeConfig) {
             setImage(image, for: .normal)
         } else {
-            setTitle(type?.imageName, for: .normal)
+            customTitleLabel.text = type?.imageName
         }
-        
-        titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         
     }
     

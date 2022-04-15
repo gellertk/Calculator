@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Constant {
+struct K {
     
     struct Color {
         
@@ -18,6 +18,13 @@ struct Constant {
 
         static let selfActionButtonTitle: UIColor = .black
         static let buttonTitle: UIColor = .white
+        
+    }
+    
+    struct Numeric {
+        
+        static let portraitButtonWidthHeight: CGFloat = UIScreen.main.bounds.width / 5
+        static let buttonSpacing: CGFloat = 15
         
     }
     

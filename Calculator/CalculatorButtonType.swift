@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum CalculatorButtonSuperType {
+enum CalculatorButtonDesign {
     
     case number
     case selfAction
@@ -18,26 +18,26 @@ enum CalculatorButtonSuperType {
         switch self {
         case .number:
             
-            return Constant.Color.numberButtonBackground
+            return K.Color.numberButtonBackground
         case .selfAction:
             
-            return Constant.Color.selfActionButtonBackground
+            return K.Color.selfActionButtonBackground
         case .action:
             
-            return Constant.Color.actionButtonBackground
+            return K.Color.actionButtonBackground
         case .engineering:
             
-            return Constant.Color.engineerButtonBackground
+            return K.Color.engineerButtonBackground
         }
     }
     
     var tintColor: UIColor {
         if self == .selfAction {
             
-            return Constant.Color.selfActionButtonTitle
+            return K.Color.selfActionButtonTitle
         }
         
-        return Constant.Color.buttonTitle
+        return K.Color.buttonTitle
     }
 }
 
@@ -58,7 +58,7 @@ enum CalculatorButtonType: String {
         return rawValue
     }
     
-    var superType: CalculatorButtonSuperType {
+    var design: CalculatorButtonDesign {
         switch self {
         case .reset, .plusMinus, .percent:
 
