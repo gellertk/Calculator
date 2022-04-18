@@ -52,9 +52,38 @@ enum CalculatorButtonType: String {
     case plus
     case equal
     case number
-    case engineering
+    case leftBracket = "("
+    case rightBracket = ")"
+    case mc
+    case mPlus = "m+"
+    case mMinus = "m-"
+    case mr = "mr"
+    case twoNd = "2nd"
+    case x2 = "x2"
+    case x3 = "x3"
+    case xY = "xY"
+    case eX = "eX"
+    case tenX = "10X"
+    case oneDivide = "1/x"
+    case sqrt2
+    case sqrt3
+    case sqrtY
+    case ln
+    case logTen
+    case factorial
+    case sin
+    case cos
+    case tan
+    case e
+    case ee
+    case rad
+    case sinh
+    case cosh
+    case tanh
+    case pi
+    case rand
     
-    var imageName: String {
+    var title: String {
         return rawValue
     }
     
@@ -69,10 +98,11 @@ enum CalculatorButtonType: String {
         case .number:
             
             return .number
-        case .engineering:
+        default:
             
             return .engineering
         }
     }
     
 }
+

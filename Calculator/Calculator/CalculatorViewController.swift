@@ -9,10 +9,19 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
+    private let calculatorView = CalculatorView()
+    
     override func loadView() {
-        let customView = CalculatorView()
-        customView.delegate = self
-        view = customView
+        calculatorView.delegate = self
+        view = calculatorView
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        calculatorView.setupLayout()
     }
     
 }

@@ -92,7 +92,7 @@
 				CB9067082806D4A100B42643 /* CalculatorBrain.swift */,
 				CB9066F62806D35E00B42643 /* CalculatorViewController.swift */,
 				CB9067062806D48800B42643 /* CalculatorView.swift */,
-				CB9067192806ED5200B42643 /* Buttons */,
+				CB9067152806E5C500B42643 /* CalculatorButton.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -113,14 +113,6 @@
 				CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		CB9067192806ED5200B42643 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				CB9067152806E5C500B42643 /* CalculatorButton.swift */,
-			);
-			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
