@@ -24,9 +24,46 @@ struct K {
     struct Numeric {
         
         static let portraitButtonWidthHeight: CGFloat = UIScreen.main.bounds.width / 5
-        static let buttonSpacing: CGFloat = 15
+        static let portraitButtonSpacing: CGFloat = 15
+        static let landscapeButtonSpacing: CGFloat = 10
+        
+        static var spacing: CGFloat {
+            if Orientation.isPortrait {
+                
+                return portraitButtonSpacing
+            }
+            
+            return landscapeButtonSpacing
+        }
+        
+        static var resultLabelFontSize: CGFloat {
+            if Orientation.isPortrait {
+                return 100
+            } else {
+                return 60
+            }
+        }
+        
+//        static var resetButtonFontSize: CGFloat {
+//            if Orientation.isLandscape {
+//                label.
+//            }
+//        }
         
     }
+    
+//    if type == .reset {
+//        label.font = UIFont.systemFont(ofSize: 35, weight: .medium)
+//    } else {
+//        label.font = UIFont.systemFont(ofSize: 38)
+//    }
+//    
+//    if type == .reset {
+//        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+//    } else {
+//        label.font = UIFont.systemFont(ofSize: 15)
+//    }
+
     
 }
 

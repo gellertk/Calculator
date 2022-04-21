@@ -39,18 +39,31 @@ enum CalculatorButtonDesign {
         
         return K.Color.buttonTitle
     }
+    
+    var font: UIFont {
+        switch self {
+        case .number:
+            return .systemFont(ofSize: 35)
+        case .selfAction:
+            return .systemFont(ofSize: 35)
+        case .action:
+            return .systemFont(ofSize: 35)
+        case .engineering:
+            return .systemFont(ofSize: 15)
+        }
+    }
 }
 
 enum CalculatorButtonType: String {
     
     case reset = "AC"
-    case plusMinus = "plus.forwardslash.minus"
-    case percent
-    case divide
-    case multiply
-    case minus
-    case plus
-    case equal
+    case plusMinus = "⁺∕₋"
+    case percent = "％"
+    case divide = "÷"
+    case multiply = "×"
+    case minus = "−"
+    case plus = "+"
+    case equal = "="
     case number
     case leftBracket = "("
     case rightBracket = ")"
@@ -70,18 +83,18 @@ enum CalculatorButtonType: String {
     case sqrtY
     case ln
     case logTen
-    case factorial
+    case factorial = "x!"
     case sin
     case cos
     case tan
     case e
-    case ee
-    case rad
+    case ee = "EE"
+    case rad = "Rad"
     case sinh
     case cosh
     case tanh
     case pi
-    case rand
+    case rand = "Rand"
     
     var title: String {
         return rawValue

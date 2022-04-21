@@ -13,153 +13,33 @@ protocol CalculatorViewDelegate: AnyObject {
 
 class CalculatorView: UIView {
     
-    private lazy var heightPortraitConstraint = topImageContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
-    private lazy var heightLandscapeConstraint = topImageContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2)
-    
     weak var delegate: CalculatorViewDelegate?
     
-    private let resultLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0"
-        label.font = UIFont.systemFont(ofSize: 100, weight: .light)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
+    private var resultView = ResultView()
+    private var keyboardView = KeyboardView()
     
-    let topImageContainerView = UIView()
+    private lazy var portraitConstraint = [
+        resultView.topAnchor.constraint(equalTo: topAnchor),
+        resultView.leadingAnchor.constraint(equalTo: leadingAnchor),
+        resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 5),
+        resultView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+        
+        keyboardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30),
+    ]
     
-    private func getArrangedSubviews() -> [[UIView]] {
+    private lazy var landscapeConstraints = [
+        resultView.topAnchor.constraint(equalTo: topAnchor),
+        resultView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor),
+        resultView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+        resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor),
+        resultView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
         
-        if Orientation.isPortrait {
-            
-            let bottomRowStackView = UIStackView(arrangedSubviews: [
-                CalculatorButton(type: .number, title: ","),
-                CalculatorButton(type: .equal)
-            ],
-                                                 axis: .horizontal,
-                                                 spacing: K.Numeric.buttonSpacing,
-                                                 distribution: .fillEqually)
-            
-            return [
-                [CalculatorButton(type: .reset),
-                 CalculatorButton(type: .plusMinus),
-                 CalculatorButton(type: .percent),
-                 CalculatorButton(type: .divide)],
-                
-                [CalculatorButton(type: .number, title: "7"),
-                 CalculatorButton(type: .number, title: "8"),
-                 CalculatorButton(type: .number, title: "9"),
-                 CalculatorButton(type: .multiply)],
-                
-                [CalculatorButton(type: .number, title: "4"),
-                 CalculatorButton(type: .number, title: "5"),
-                 CalculatorButton(type: .number, title: "6"),
-                 CalculatorButton(type: .minus)],
-                
-                [CalculatorButton(type: .number, title: "1"),
-                 CalculatorButton(type: .number, title: "2"),
-                 CalculatorButton(type: .number, title: "3"),
-                 CalculatorButton(type: .plus)],
-                
-                [CalculatorButton(type: .number, title: "0"),
-                 bottomRowStackView]
-            ]
-            
-        } else {
-            
-            let bottomRowStackView = UIStackView(arrangedSubviews: [
-                CalculatorButton(type: .rad),
-                CalculatorButton(type: .sinh),
-                CalculatorButton(type: .cosh),
-                CalculatorButton(type: .tanh),
-                CalculatorButton(type: .pi),
-                CalculatorButton(type: .rand)
-            ],
-                                                 axis: .horizontal,
-                                                 spacing: K.Numeric.buttonSpacing,
-                                                 distribution: .fillEqually)
-            
-            let endStackView = UIStackView(arrangedSubviews: [
-                CalculatorButton(type: .number, title: ","),
-                CalculatorButton(type: .equal)
-            ],
-                                           axis: .horizontal,
-                                           spacing: K.Numeric.buttonSpacing,
-                                           distribution: .fillEqually)
-            
-            return [
-                [CalculatorButton(type: .leftBracket),
-                 CalculatorButton(type: .rightBracket),
-                 CalculatorButton(type: .mc),
-                 CalculatorButton(type: .mPlus),
-                 CalculatorButton(type: .mMinus),
-                 CalculatorButton(type: .mr),
-                 CalculatorButton(type: .reset),
-                 CalculatorButton(type: .plusMinus),
-                 CalculatorButton(type: .percent),
-                 CalculatorButton(type: .divide)],
-                
-                [CalculatorButton(type: .twoNd),
-                 CalculatorButton(type: .x2),
-                 CalculatorButton(type: .x3),
-                 CalculatorButton(type: .xY),
-                 CalculatorButton(type: .eX),
-                 CalculatorButton(type: .tenX),
-                 CalculatorButton(type: .number, title: "7"),
-                 CalculatorButton(type: .number, title: "8"),
-                 CalculatorButton(type: .number, title: "9"),
-                 CalculatorButton(type: .multiply)],
-                
-                [CalculatorButton(type: .oneDivide),
-                 CalculatorButton(type: .sqrt2),
-                 CalculatorButton(type: .sqrt3),
-                 CalculatorButton(type: .sqrtY),
-                 CalculatorButton(type: .ln),
-                 CalculatorButton(type: .logTen),
-                 CalculatorButton(type: .number, title: "4"),
-                 CalculatorButton(type: .number, title: "5"),
-                 CalculatorButton(type: .number, title: "6"),
-                 CalculatorButton(type: .minus)],
-                
-                [CalculatorButton(type: .factorial),
-                 CalculatorButton(type: .sin),
-                 CalculatorButton(type: .cos),
-                 CalculatorButton(type: .tan),
-                 CalculatorButton(type: .e),
-                 CalculatorButton(type: .ee),
-                 CalculatorButton(type: .number, title: "1"),
-                 CalculatorButton(type: .number, title: "2"),
-                 CalculatorButton(type: .number, title: "3"),
-                 CalculatorButton(type: .plus)],
-                
-                [bottomRowStackView,
-                CalculatorButton(type: .number, title: "0"),
-                 endStackView
-                ]
-            ]
-        }
-    }
-    
-    private lazy var buttonStackView: UIStackView = {
-        //backgroundColor = .cyan
-        
-        let arrangedSubviews = getArrangedSubviews()
-        
-        let horizontalStackViews = arrangedSubviews.map { UIStackView(arrangedSubviews: $0,
-                                                                      axis: .horizontal,
-                                                                      spacing: K.Numeric.buttonSpacing,
-                                                                      distribution: .fillEqually)
-        }
-        
-        let stackView = UIStackView(arrangedSubviews: horizontalStackViews,
-                                    axis: .vertical,
-                                    spacing: K.Numeric.buttonSpacing,
-                                    distribution: .fillEqually)
-        
-        return stackView
-    }()
+        keyboardView.topAnchor.constraint(equalTo: resultView.bottomAnchor),
+        keyboardView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+        keyboardView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+    ]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -171,28 +51,7 @@ class CalculatorView: UIView {
     }
     
     func setupLayout() {
-        if Orientation.isLandscape {
-            heightLandscapeConstraint.isActive = true
-            heightPortraitConstraint.isActive = false
-            resultLabel.font = UIFont.systemFont(ofSize: 50, weight: .medium)
-//            if let stackViews = buttonStackView.arrangedSubviews as? [UIStackView] {
-//                for stackView in stackViews {
-//                    for button in stackView.arrangedSubviews {
-//                        if let button = button as? CalculatorButton {
-//                            //button.setupLayout()
-//                            //button.layoutSubviews()
-//                        }
-//                    }
-//                }
-//            }
-            //layoutIfNeeded()
-            
-        } else {
-            resultLabel.font = UIFont.systemFont(ofSize: 100, weight: .light)
-            
-            heightPortraitConstraint.isActive = true
-            heightLandscapeConstraint.isActive = false
-        }
+        setupConstraints()
     }
     
 }
@@ -201,35 +60,24 @@ private extension CalculatorView {
     
     func setupView() {
         backgroundColor = .black
-        
-        topImageContainerView.backgroundColor = .blue
-        topImageContainerView.addSubview(resultLabel)
-        
-        addSubviews([topImageContainerView,
-                     buttonStackView])
+        addSubviews([resultView,
+                     keyboardView])
         setupConstraints()
-        setupLayout()
     }
     
     func setupConstraints() {
         
-        heightPortraitConstraint.isActive = true
+        keyboardView.setupButtonsStackView()
+        resultView.setupResultLabel()
         
-        NSLayoutConstraint.activate([
-            
-            topImageContainerView.topAnchor.constraint(equalTo: topAnchor),
-            topImageContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            topImageContainerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            resultLabel.bottomAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 10),
-            resultLabel.trailingAnchor.constraint(equalTo: topImageContainerView.safeAreaLayoutGuide.trailingAnchor),
-            
-            buttonStackView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor),
-            buttonStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            buttonStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            buttonStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            
-        ])
+        if Orientation.isPortrait {
+            NSLayoutConstraint.deactivate(landscapeConstraints)
+            NSLayoutConstraint.activate(portraitConstraint)
+        } else if Orientation.isLandscape {
+            NSLayoutConstraint.deactivate(portraitConstraint)
+            NSLayoutConstraint.activate(landscapeConstraints)
+        }
+        
     }
     
 }

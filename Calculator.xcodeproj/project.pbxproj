@@ -21,6 +21,8 @@
 		CB90671B2806EEBC00B42643 /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */; };
 		CB90671D2806FED600B42643 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671C2806FED600B42643 /* Enumerations.swift */; };
 		CB90671F280724E000B42643 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671E280724E000B42643 /* UIViewExtension.swift */; };
+		CBDC84FB28100BA300043157 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC84FA28100BA300043157 /* KeyboardView.swift */; };
+		CBDC84FD28100D7900043157 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC84FC28100D7900043157 /* ResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
 		CB90671C2806FED600B42643 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		CB90671E280724E000B42643 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		CBDC84FA28100BA300043157 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		CBDC84FC28100D7900043157 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 				CB9067082806D4A100B42643 /* CalculatorBrain.swift */,
 				CB9066F62806D35E00B42643 /* CalculatorViewController.swift */,
 				CB9067062806D48800B42643 /* CalculatorView.swift */,
+				CBDC84FA28100BA300043157 /* KeyboardView.swift */,
+				CBDC84FC28100D7900043157 /* ResultView.swift */,
 				CB9067152806E5C500B42643 /* CalculatorButton.swift */,
 			);
 			path = Calculator;
@@ -186,9 +192,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB90671B2806EEBC00B42643 /* UIStackViewExtension.swift in Sources */,
+				CBDC84FB28100BA300043157 /* KeyboardView.swift in Sources */,
 				CB9067072806D48800B42643 /* CalculatorView.swift in Sources */,
 				CB9066F72806D35E00B42643 /* CalculatorViewController.swift in Sources */,
 				CB9066F32806D35E00B42643 /* AppDelegate.swift in Sources */,
+				CBDC84FD28100D7900043157 /* ResultView.swift in Sources */,
 				CB9067112806E26C00B42643 /* Functions.swift in Sources */,
 				CB9067092806D4A100B42643 /* CalculatorBrain.swift in Sources */,
 				CB90671F280724E000B42643 /* UIViewExtension.swift in Sources */,

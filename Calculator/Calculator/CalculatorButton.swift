@@ -8,32 +8,21 @@
 import UIKit
 
 class CalculatorButton: UIButton {
+        
+    var type: CalculatorButtonType = .equal
     
-    private lazy var widthConstraint = widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
-    private lazy var heightConstraint = heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
-
-    private var type: CalculatorButtonType?
-    
-    private var isZeroNumber: Bool {
+    private lazy var widthPortraitConstraint = widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
+    private lazy var heightPortraitConstraint = heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
+        
+    private var isZeroButton: Bool {
         customTitleLabel.text == "0" ? true : false
     }
     
     private lazy var customTitleLabel: UILabel = {
         let label = UILabel()
+        label.font = type.design.font
+        label.textColor = type.design.tintColor
         
-        label.textColor = type?.design.tintColor
-        if type == .reset {
-            label.font = UIFont.systemFont(ofSize: 35, weight: .medium)
-        } else {
-            label.font = UIFont.systemFont(ofSize: 38)
-        }
-        
-        if type == .reset {
-            label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        } else {
-            label.font = UIFont.systemFont(ofSize: 15)
-        }
-
         return label
     }()
     
@@ -50,24 +39,30 @@ class CalculatorButton: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if isZeroNumber {
-            layer.cornerRadius = K.Numeric.portraitButtonWidthHeight / 2
-            //layer.cornerRadius = bounds.height / 2
+        if isZeroButton {
+            if Orientation.isLandscape {
+                layer.cornerRadius = bounds.height / 2
+            } else {
+                layer.cornerRadius = K.Numeric.portraitButtonWidthHeight / 2
+            }
         } else {
-            layer.cornerRadius = bounds.width / 2
-            //layer.cornerRadius = bounds.height / 2
+            if Orientation.isLandscape {
+                layer.cornerRadius = bounds.height / 2
+            } else {
+                layer.cornerRadius = K.Numeric.portraitButtonWidthHeight / 2
+            }
         }
     }
     
-    func setupLayout() {
-        if Orientation.isLandscape {
-//            widthConstraint.isActive = false
-//            heightConstraint.isActive = false
-//            widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight / 2).isActive = true
-//            heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight / 2).isActive = true
-        } else {
-//            heightPortraitConstraint.isActive = true
-//            heightLandscapeConstraint.isActive = false
+    func setup() {
+        customTitleLabel.font = type.design.font
+        if type.design == .engineering {
+            isHidden = Orientation.isPortrait
+        }
+        
+        if !isZeroButton {
+            heightPortraitConstraint.isActive = Orientation.isPortrait
+            widthPortraitConstraint.isActive = Orientation.isPortrait
         }
     }
     
@@ -76,50 +71,38 @@ class CalculatorButton: UIButton {
 private extension CalculatorButton {
     
     func setupView() {
-        backgroundColor = type?.design.backgroundColor
-        tintColor = type?.design.tintColor
-
+        backgroundColor = type.design.backgroundColor
+        tintColor = type.design.tintColor
         addSubviews([customTitleLabel])
         setupConstraints()
     }
     
+    func setTitle(_ title: String?) {
+        
+        if let title = title {
+            customTitleLabel.text = title
+        } else {
+            customTitleLabel.text = type.title
+        }
+        
+    }
+    
     func setupConstraints() {
         
-        //heightConstraint.isActive = true
-        customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-                
-        if isZeroNumber {
-            customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                      constant: -50).isActive = true
+        if isZeroButton {
+            customTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                      constant: K.Numeric.portraitButtonWidthHeight / 2.3).isActive = true
         } else {
             customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            //widthConstraint.isActive = true
         }
+        
+        NSLayoutConstraint.activate([
+            customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            customTitleLabel.heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight / 2)
+        ])
         
     }
     
 }
 
-extension CalculatorButton {
-    
-    func setTitle(_ title: String?) {
-        
-        var largeConfig: UIImage.SymbolConfiguration
-        
-        if type?.design == .selfAction {
-            largeConfig = UIImage.SymbolConfiguration(pointSize: K.Numeric.portraitButtonWidthHeight / 2.8, weight: .semibold)
-        } else {
-            largeConfig = UIImage.SymbolConfiguration(pointSize: K.Numeric.portraitButtonWidthHeight / 2.5, weight: .bold)
-        }
-        
-        if let title = title {
-            customTitleLabel.text = title
-        } else if let image = UIImage(systemName: type?.title ?? "", withConfiguration: largeConfig) {
-            setImage(image, for: .normal)
-        } else {
-            customTitleLabel.text = type?.title
-        }
-        
-    }
-    
-}
+//widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight * 2 + K.Numeric.spacing).isActive = true
