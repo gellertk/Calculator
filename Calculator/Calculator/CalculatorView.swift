@@ -22,23 +22,23 @@ class CalculatorView: UIView {
         resultView.topAnchor.constraint(equalTo: topAnchor),
         resultView.leadingAnchor.constraint(equalTo: leadingAnchor),
         resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 5),
-        resultView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
+        resultView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor),
         
-        keyboardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -30),
+        keyboardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 3.5),
+        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 4)
     ]
     
     private lazy var landscapeConstraints = [
         resultView.topAnchor.constraint(equalTo: topAnchor),
         resultView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor),
         resultView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-        resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor),
+        resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 4),
         resultView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
         
         keyboardView.topAnchor.constraint(equalTo: resultView.bottomAnchor),
+        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         keyboardView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-        keyboardView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        keyboardView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
     ]
     
     override init(frame: CGRect) {
@@ -67,8 +67,10 @@ private extension CalculatorView {
     
     func setupConstraints() {
         
-        keyboardView.setupButtonsStackView()
-        resultView.setupResultLabel()
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.keyboardView.setupButtonsStackView()
+            self?.resultView.setupResultLabel()
+        }
         
         if Orientation.isPortrait {
             NSLayoutConstraint.deactivate(landscapeConstraints)

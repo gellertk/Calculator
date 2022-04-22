@@ -29,59 +29,19 @@ struct K {
         
         static var spacing: CGFloat {
             if Orientation.isPortrait {
-                
                 return portraitButtonSpacing
             }
-            
             return landscapeButtonSpacing
         }
         
         static var resultLabelFontSize: CGFloat {
             if Orientation.isPortrait {
-                return 100
+                return portraitButtonWidthHeight * 1.3
             } else {
-                return 60
+                return portraitButtonWidthHeight * 0.7
             }
         }
-        
-//        static var resetButtonFontSize: CGFloat {
-//            if Orientation.isLandscape {
-//                label.
-//            }
-//        }
-        
+
     }
     
-//    if type == .reset {
-//        label.font = UIFont.systemFont(ofSize: 35, weight: .medium)
-//    } else {
-//        label.font = UIFont.systemFont(ofSize: 38)
-//    }
-//    
-//    if type == .reset {
-//        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-//    } else {
-//        label.font = UIFont.systemFont(ofSize: 15)
-//    }
-
-    
-}
-
-struct Orientation {
-    // indicate current device is in the LandScape orientation
-    static var isLandscape: Bool {
-        get {
-            return UIDevice.current.orientation.isValidInterfaceOrientation
-                ? UIDevice.current.orientation.isLandscape
-                : (UIApplication.shared.windows.first?.windowScene?.interfaceOrientation.isLandscape)!
-        }
-    }
-    // indicate current device is in the Portrait orientation
-    static var isPortrait: Bool {
-        get {
-            return UIDevice.current.orientation.isValidInterfaceOrientation
-                ? UIDevice.current.orientation.isPortrait
-                : (UIApplication.shared.windows.first?.windowScene?.interfaceOrientation.isPortrait)!
-        }
-    }
 }

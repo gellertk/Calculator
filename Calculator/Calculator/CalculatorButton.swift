@@ -8,29 +8,30 @@
 import UIKit
 
 class CalculatorButton: UIButton {
-        
-    var type: CalculatorButtonType = .equal
+    
+    var operation: Operation = .equal
     
     private lazy var widthPortraitConstraint = widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
     private lazy var heightPortraitConstraint = heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
-        
+    
     private var isZeroButton: Bool {
         customTitleLabel.text == "0" ? true : false
     }
     
     private lazy var customTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = type.design.font
-        label.textColor = type.design.tintColor
+        label.font = operation.buttonType.font
+        label.textColor = operation.buttonType.tintColor
         
         return label
     }()
     
-    init(type: CalculatorButtonType, title: String? = nil) {
+    init(operation: Operation, title: String? = nil) {
         super.init(frame: .zero)
-        self.type = type
+        self.operation = operation
         setTitle(title)
         setupView()
+        setupTargets()
     }
     
     required init?(coder: NSCoder) {
@@ -52,12 +53,15 @@ class CalculatorButton: UIButton {
                 layer.cornerRadius = K.Numeric.portraitButtonWidthHeight / 2
             }
         }
+        
     }
     
     func setup() {
-        customTitleLabel.font = type.design.font
-        if type.design == .engineering {
+        customTitleLabel.font = operation.buttonType.font
+        if operation.buttonType == .engineering {
             isHidden = Orientation.isPortrait
+        } else if operation.buttonType != .number {
+            setImage(operation.buttonImage, for: .normal)
         }
         
         if !isZeroButton {
@@ -71,38 +75,37 @@ class CalculatorButton: UIButton {
 private extension CalculatorButton {
     
     func setupView() {
-        backgroundColor = type.design.backgroundColor
-        tintColor = type.design.tintColor
+        backgroundColor = operation.buttonType.backgroundColor
+        tintColor = operation.buttonType.tintColor
         addSubviews([customTitleLabel])
         setupConstraints()
     }
     
-    func setTitle(_ title: String?) {
-        
-        if let title = title {
-            customTitleLabel.text = title
-        } else {
-            customTitleLabel.text = type.title
-        }
-        
-    }
-    
     func setupConstraints() {
-        
-        if isZeroButton {
-            customTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                      constant: K.Numeric.portraitButtonWidthHeight / 2.3).isActive = true
-        } else {
-            customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        }
         
         NSLayoutConstraint.activate([
             customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            customTitleLabel.heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight / 2)
+            customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
         
     }
     
+    func setTitle(_ title: String?) {
+        
+        if operation.buttonType == .number
+            || operation == .reset {
+            customTitleLabel.text = title
+        } else if operation.buttonType == .engineering {
+            customTitleLabel.text = operation.buttonTitle
+        } else {
+            setImage(operation.buttonImage, for: .normal)
+        }
+        
+    }
+    
+    func setupTargets() {
+//        touchesBegan(<#T##touches: Set<UITouch>##Set<UITouch>#>, with: <#T##UIEvent?#>)
+//        addTarget(self, action: #selector(<#T##@objc method#>), for: <#T##UIControl.Event#>)
+    }
+    
 }
-
-//widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight * 2 + K.Numeric.spacing).isActive = true

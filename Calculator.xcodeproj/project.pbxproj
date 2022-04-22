@@ -15,12 +15,13 @@
 		CB9067072806D48800B42643 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9067062806D48800B42643 /* CalculatorView.swift */; };
 		CB9067092806D4A100B42643 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9067082806D4A100B42643 /* CalculatorBrain.swift */; };
 		CB90670D2806DBE400B42643 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90670C2806DBE400B42643 /* Constant.swift */; };
-		CB90670F2806DE8D00B42643 /* CalculatorButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90670E2806DE8D00B42643 /* CalculatorButtonType.swift */; };
+		CB90670F2806DE8D00B42643 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90670E2806DE8D00B42643 /* Operation.swift */; };
 		CB9067112806E26C00B42643 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9067102806E26C00B42643 /* Functions.swift */; };
 		CB9067162806E5C500B42643 /* CalculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9067152806E5C500B42643 /* CalculatorButton.swift */; };
 		CB90671B2806EEBC00B42643 /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */; };
-		CB90671D2806FED600B42643 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671C2806FED600B42643 /* Enumerations.swift */; };
 		CB90671F280724E000B42643 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671E280724E000B42643 /* UIViewExtension.swift */; };
+		CBD6F25028131A860032AB73 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD6F24F28131A860032AB73 /* Orientation.swift */; };
+		CBD6F25228131BFF0032AB73 /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD6F25128131BFF0032AB73 /* ButtonType.swift */; };
 		CBDC84FB28100BA300043157 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC84FA28100BA300043157 /* KeyboardView.swift */; };
 		CBDC84FD28100D7900043157 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC84FC28100D7900043157 /* ResultView.swift */; };
 /* End PBXBuildFile section */
@@ -36,12 +37,13 @@
 		CB9067062806D48800B42643 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		CB9067082806D4A100B42643 /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		CB90670C2806DBE400B42643 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		CB90670E2806DE8D00B42643 /* CalculatorButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButtonType.swift; sourceTree = "<group>"; };
+		CB90670E2806DE8D00B42643 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		CB9067102806E26C00B42643 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		CB9067152806E5C500B42643 /* CalculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButton.swift; sourceTree = "<group>"; };
 		CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
-		CB90671C2806FED600B42643 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		CB90671E280724E000B42643 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		CBD6F24F28131A860032AB73 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
+		CBD6F25128131BFF0032AB73 /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
 		CBDC84FA28100BA300043157 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		CBDC84FC28100D7900043157 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,9 +78,9 @@
 		CB9066F12806D35E00B42643 /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				CBD6F25328131C790032AB73 /* Enumerations */,
 				CB90670C2806DBE400B42643 /* Constant.swift */,
-				CB90670E2806DE8D00B42643 /* CalculatorButtonType.swift */,
-				CB90671C2806FED600B42643 /* Enumerations.swift */,
+				CBD6F24F28131A860032AB73 /* Orientation.swift */,
 				CB9067102806E26C00B42643 /* Functions.swift */,
 				CB90670A2806D4B700B42643 /* Calculator */,
 				CB90670B2806D4C000B42643 /* SupportingFiles */,
@@ -119,6 +121,15 @@
 				CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CBD6F25328131C790032AB73 /* Enumerations */ = {
+			isa = PBXGroup;
+			children = (
+				CB90670E2806DE8D00B42643 /* Operation.swift */,
+				CBD6F25128131BFF0032AB73 /* ButtonType.swift */,
+			);
+			path = Enumerations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,9 +212,10 @@
 				CB9067092806D4A100B42643 /* CalculatorBrain.swift in Sources */,
 				CB90671F280724E000B42643 /* UIViewExtension.swift in Sources */,
 				CB9066F52806D35E00B42643 /* SceneDelegate.swift in Sources */,
+				CBD6F25228131BFF0032AB73 /* ButtonType.swift in Sources */,
+				CBD6F25028131A860032AB73 /* Orientation.swift in Sources */,
 				CB90670D2806DBE400B42643 /* Constant.swift in Sources */,
-				CB90670F2806DE8D00B42643 /* CalculatorButtonType.swift in Sources */,
-				CB90671D2806FED600B42643 /* Enumerations.swift in Sources */,
+				CB90670F2806DE8D00B42643 /* Operation.swift in Sources */,
 				CB9067162806E5C500B42643 /* CalculatorButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

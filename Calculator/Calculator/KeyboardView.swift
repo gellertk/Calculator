@@ -11,89 +11,89 @@ class KeyboardView: UIView {
     
     private var firstRowButtons: [UIView] = {
         
-        return [CalculatorButton(type: .leftBracket),
-                CalculatorButton(type: .rightBracket),
-                CalculatorButton(type: .mc),
-                CalculatorButton(type: .mPlus),
-                CalculatorButton(type: .mMinus),
-                CalculatorButton(type: .mr),
-                CalculatorButton(type: .reset),
-                CalculatorButton(type: .plusMinus),
-                CalculatorButton(type: .percent),
-                CalculatorButton(type: .divide)]
+        return [CalculatorButton(operation: .leftBracket),
+                CalculatorButton(operation: .rightBracket),
+                CalculatorButton(operation: .mc),
+                CalculatorButton(operation: .mPlus),
+                CalculatorButton(operation: .mMinus),
+                CalculatorButton(operation: .mr),
+                CalculatorButton(operation: .reset, title: "AC"),
+                CalculatorButton(operation: .plusMinus),
+                CalculatorButton(operation: .percent),
+                CalculatorButton(operation: .divide)]
     }()
     
     private var secondRowButtons: [UIView] = {
 
-        return [CalculatorButton(type: .twoNd),
-                CalculatorButton(type: .x2),
-                CalculatorButton(type: .x3),
-                CalculatorButton(type: .xY),
-                CalculatorButton(type: .eX),
-                CalculatorButton(type: .tenX),
-                CalculatorButton(type: .number, title: "7"),
-                CalculatorButton(type: .number, title: "8"),
-                CalculatorButton(type: .number, title: "9"),
-                CalculatorButton(type: .multiply)]
+        return [CalculatorButton(operation: .twoNd),
+                CalculatorButton(operation: .x2),
+                CalculatorButton(operation: .x3),
+                CalculatorButton(operation: .xY),
+                CalculatorButton(operation: .eX),
+                CalculatorButton(operation: .tenX),
+                CalculatorButton(operation: .number, title: "7"),
+                CalculatorButton(operation: .number, title: "8"),
+                CalculatorButton(operation: .number, title: "9"),
+                CalculatorButton(operation: .multiply)]
     }()
     
     private var thirdRowButtons: [UIView] = {
         
-        return [CalculatorButton(type: .oneDivide),
-                CalculatorButton(type: .sqrt2),
-                CalculatorButton(type: .sqrt3),
-                CalculatorButton(type: .sqrtY),
-                CalculatorButton(type: .ln),
-                CalculatorButton(type: .logTen),
-                CalculatorButton(type: .number, title: "4"),
-                CalculatorButton(type: .number, title: "5"),
-                CalculatorButton(type: .number, title: "6"),
-                CalculatorButton(type: .minus)]
+        return [CalculatorButton(operation: .oneDivide),
+                CalculatorButton(operation: .sqrt2),
+                CalculatorButton(operation: .sqrt3),
+                CalculatorButton(operation: .sqrtY),
+                CalculatorButton(operation: .ln),
+                CalculatorButton(operation: .logTen),
+                CalculatorButton(operation: .number, title: "4"),
+                CalculatorButton(operation: .number, title: "5"),
+                CalculatorButton(operation: .number, title: "6"),
+                CalculatorButton(operation: .minus)]
     }()
     
     private var fourthRowButtons: [UIView] = {
         
-        return [CalculatorButton(type: .factorial),
-                CalculatorButton(type: .sin),
-                CalculatorButton(type: .cos),
-                CalculatorButton(type: .tan),
-                CalculatorButton(type: .e),
-                CalculatorButton(type: .ee),
-                CalculatorButton(type: .number, title: "1"),
-                CalculatorButton(type: .number, title: "2"),
-                CalculatorButton(type: .number, title: "3"),
-                CalculatorButton(type: .plus)]
+        return [CalculatorButton(operation: .factorial),
+                CalculatorButton(operation: .sin),
+                CalculatorButton(operation: .cos),
+                CalculatorButton(operation: .tan),
+                CalculatorButton(operation: .e),
+                CalculatorButton(operation: .ee),
+                CalculatorButton(operation: .number, title: "1"),
+                CalculatorButton(operation: .number, title: "2"),
+                CalculatorButton(operation: .number, title: "3"),
+                CalculatorButton(operation: .plus)]
     }()
     
     private var fifthRowButtons: [UIView] = {
 
         let stackView1 = UIStackView(arrangedSubviews: [
-            CalculatorButton(type: .rad),
-            CalculatorButton(type: .sinh)
+            CalculatorButton(operation: .rad),
+            CalculatorButton(operation: .sinh)
         ],
                                      axis: .horizontal,
                                      spacing: K.Numeric.spacing,
                                      distribution: .fillEqually)
         
         let stackView2 = UIStackView(arrangedSubviews: [
-            CalculatorButton(type: .cosh),
-            CalculatorButton(type: .tanh)
+            CalculatorButton(operation: .cosh),
+            CalculatorButton(operation: .tanh)
         ],
                                      axis: .horizontal,
                                      spacing: K.Numeric.spacing,
                                      distribution: .fillEqually)
         
         let stackView3 = UIStackView(arrangedSubviews: [
-            CalculatorButton(type: .pi),
-            CalculatorButton(type: .rand)
+            CalculatorButton(operation: .pi),
+            CalculatorButton(operation: .rand)
         ],
                                      axis: .horizontal,
                                      spacing: K.Numeric.spacing,
                                      distribution: .fillEqually)
         
         let stackView4 = UIStackView(arrangedSubviews: [
-            CalculatorButton(type: .number, title: ","),
-            CalculatorButton(type: .equal)
+            CalculatorButton(operation: .number, title: ","),
+            CalculatorButton(operation: .equal)
         ],
                                      axis: .horizontal,
                                      spacing: K.Numeric.spacing,
@@ -102,7 +102,7 @@ class KeyboardView: UIView {
         return [stackView1,
                 stackView2,
                 stackView3,
-                CalculatorButton(type: .number, title: "0"),
+                CalculatorButton(operation: .number, title: "0"),
                 stackView4]
     }()
     
@@ -140,18 +140,20 @@ class KeyboardView: UIView {
     
     func setupButtonsStackView() {
         
-        UIView.animate(withDuration: 0.2) {
-            let allButtons: [CalculatorButton] = self.allSubviews(of: CalculatorButton.self)
+        buttonsStackView.spacing = K.Numeric.spacing
+        for view in rowsStackView {
+            view.spacing = K.Numeric.spacing
+        }
             
-            for button in allButtons {
-                button.setup()
-            }
-                        
-            for row in 0...2 {
-                self.fifthRowButtons[row].isHidden = Orientation.isPortrait
-            }
+        let allButtons: [CalculatorButton] = self.allSubviews(of: CalculatorButton.self)
+        
+        for row in 0...2 {
+            self.fifthRowButtons[row].isHidden = Orientation.isPortrait
         }
         
+        for button in allButtons {
+            button.setup()
+        }
     }
     
 }
