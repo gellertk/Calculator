@@ -16,7 +16,6 @@ extension UIView {
         }
     }
     
-    
     func allSubviews<T : UIView>(of type : T.Type) -> [T] {
         var all: [T] = []
         func getSubview(view: UIView) {

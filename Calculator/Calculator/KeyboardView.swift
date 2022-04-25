@@ -7,8 +7,12 @@
 
 import UIKit
 
+protocol KeyboardViewDelegate: AnyObject {
+    func didSelectButton(_ button: CalculatorButton)
+}
+
 class KeyboardView: UIView {
-    
+            
     private var firstRowButtons: [UIView] = {
         
         return [CalculatorButton(operation: .leftBracket),
@@ -132,6 +136,7 @@ class KeyboardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupView()
+        setupDelegates()
     }
     
     required init?(coder: NSCoder) {
@@ -140,12 +145,12 @@ class KeyboardView: UIView {
     
     func setupButtonsStackView() {
         
+        let allButtons: [CalculatorButton] = self.allSubviews(of: CalculatorButton.self)
+        
         buttonsStackView.spacing = K.Numeric.spacing
         for view in rowsStackView {
             view.spacing = K.Numeric.spacing
         }
-            
-        let allButtons: [CalculatorButton] = self.allSubviews(of: CalculatorButton.self)
         
         for row in 0...2 {
             self.fifthRowButtons[row].isHidden = Orientation.isPortrait
@@ -154,6 +159,14 @@ class KeyboardView: UIView {
         for button in allButtons {
             button.setup()
         }
+    }
+    
+}
+
+extension KeyboardView: KeyboardViewDelegate {
+    
+    func didSelectButton(_ button: CalculatorButton) {
+        allSubviews(of: CalculatorButton.self)
     }
     
 }
@@ -168,14 +181,18 @@ private extension KeyboardView {
     }
     
     func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             buttonsStackView.topAnchor.constraint(equalTo: topAnchor),
             buttonsStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-        
+    }
+    
+    func setupDelegates() {
+        allSubviews(of: CalculatorButton.self).forEach {
+            $0.delegate = self
+        }
     }
     
 }

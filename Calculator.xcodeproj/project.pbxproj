@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB1A66392816F9C600A2E4CB /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A66382816F9C600A2E4CB /* UIColor+Extension.swift */; };
 		CB9066F32806D35E00B42643 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9066F22806D35E00B42643 /* AppDelegate.swift */; };
 		CB9066F52806D35E00B42643 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9066F42806D35E00B42643 /* SceneDelegate.swift */; };
 		CB9066F72806D35E00B42643 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9066F62806D35E00B42643 /* CalculatorViewController.swift */; };
@@ -18,8 +19,8 @@
 		CB90670F2806DE8D00B42643 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90670E2806DE8D00B42643 /* Operation.swift */; };
 		CB9067112806E26C00B42643 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9067102806E26C00B42643 /* Functions.swift */; };
 		CB9067162806E5C500B42643 /* CalculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9067152806E5C500B42643 /* CalculatorButton.swift */; };
-		CB90671B2806EEBC00B42643 /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */; };
-		CB90671F280724E000B42643 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671E280724E000B42643 /* UIViewExtension.swift */; };
+		CB90671B2806EEBC00B42643 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671A2806EEBC00B42643 /* UIStackView+Extension.swift */; };
+		CB90671F280724E000B42643 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671E280724E000B42643 /* UIView+Extension.swift */; };
 		CBD6F25028131A860032AB73 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD6F24F28131A860032AB73 /* Orientation.swift */; };
 		CBD6F25228131BFF0032AB73 /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD6F25128131BFF0032AB73 /* ButtonType.swift */; };
 		CBDC84FB28100BA300043157 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC84FA28100BA300043157 /* KeyboardView.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB1A66382816F9C600A2E4CB /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		CB9066EF2806D35E00B42643 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9066F22806D35E00B42643 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB9066F42806D35E00B42643 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,8 +42,8 @@
 		CB90670E2806DE8D00B42643 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		CB9067102806E26C00B42643 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		CB9067152806E5C500B42643 /* CalculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButton.swift; sourceTree = "<group>"; };
-		CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
-		CB90671E280724E000B42643 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		CB90671A2806EEBC00B42643 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		CB90671E280724E000B42643 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CBD6F24F28131A860032AB73 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		CBD6F25128131BFF0032AB73 /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
 		CBDC84FA28100BA300043157 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
@@ -117,8 +119,9 @@
 		CB9067122806E27700B42643 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CB90671E280724E000B42643 /* UIViewExtension.swift */,
-				CB90671A2806EEBC00B42643 /* UIStackViewExtension.swift */,
+				CB90671E280724E000B42643 /* UIView+Extension.swift */,
+				CB1A66382816F9C600A2E4CB /* UIColor+Extension.swift */,
+				CB90671A2806EEBC00B42643 /* UIStackView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -202,15 +205,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB90671B2806EEBC00B42643 /* UIStackViewExtension.swift in Sources */,
+				CB90671B2806EEBC00B42643 /* UIStackView+Extension.swift in Sources */,
 				CBDC84FB28100BA300043157 /* KeyboardView.swift in Sources */,
 				CB9067072806D48800B42643 /* CalculatorView.swift in Sources */,
 				CB9066F72806D35E00B42643 /* CalculatorViewController.swift in Sources */,
 				CB9066F32806D35E00B42643 /* AppDelegate.swift in Sources */,
 				CBDC84FD28100D7900043157 /* ResultView.swift in Sources */,
 				CB9067112806E26C00B42643 /* Functions.swift in Sources */,
+				CB1A66392816F9C600A2E4CB /* UIColor+Extension.swift in Sources */,
 				CB9067092806D4A100B42643 /* CalculatorBrain.swift in Sources */,
-				CB90671F280724E000B42643 /* UIViewExtension.swift in Sources */,
+				CB90671F280724E000B42643 /* UIView+Extension.swift in Sources */,
 				CB9066F52806D35E00B42643 /* SceneDelegate.swift in Sources */,
 				CBD6F25228131BFF0032AB73 /* ButtonType.swift in Sources */,
 				CBD6F25028131A860032AB73 /* Orientation.swift in Sources */,

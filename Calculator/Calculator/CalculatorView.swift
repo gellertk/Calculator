@@ -22,10 +22,10 @@ class CalculatorView: UIView {
         resultView.topAnchor.constraint(equalTo: topAnchor),
         resultView.leadingAnchor.constraint(equalTo: leadingAnchor),
         resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 5),
-        resultView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor),
+        resultView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 7),
         
         keyboardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 3.5),
-        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 4)
+        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 2)
     ]
     
     private lazy var landscapeConstraints = [

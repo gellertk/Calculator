@@ -18,6 +18,19 @@ class CalculatorButton: UIButton {
         customTitleLabel.text == "0" ? true : false
     }
     
+    override var isSelected: Bool {
+        didSet {
+            //createAnimatorBasedIsSelected()
+            if isSelected {
+                delegate?.didSelectButton(self)
+            }
+        }
+    }
+    
+    private var animator = UIViewPropertyAnimator()
+    
+    weak var delegate: KeyboardViewDelegate?
+    
     private lazy var customTitleLabel: UILabel = {
         let label = UILabel()
         label.font = operation.buttonType.font
@@ -82,12 +95,10 @@ private extension CalculatorButton {
     }
     
     func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
-        
     }
     
     func setTitle(_ title: String?) {
@@ -104,8 +115,62 @@ private extension CalculatorButton {
     }
     
     func setupTargets() {
-//        touchesBegan(<#T##touches: Set<UITouch>##Set<UITouch>#>, with: <#T##UIEvent?#>)
-//        addTarget(self, action: #selector(<#T##@objc method#>), for: <#T##UIControl.Event#>)
+        addTarget(self, action: #selector(didTouchDown), for: [.touchDown, .touchDragEnter])
+        addTarget(self, action: #selector(didTouchUp), for: [.touchUpInside, .touchDragExit, .touchCancel])
     }
     
 }
+
+private extension CalculatorButton {
+    
+    @objc func didTouchDown() {
+        animator.stopAnimation(true)
+        backgroundColor = operation.buttonType.highlightedBackgroundColor
+    }
+    
+    @objc func didTouchUp() {
+        createAnimator()
+    }
+    
+    func handleBasedIsSelected() {
+        if animator.isRunning {
+            animator.stopAnimation(true)
+        }
+        createAnimator()
+    }
+    
+    func createAnimator() {
+        createAnimatorBasedIsSelected()
+        animator.startAnimation()
+    }
+    
+    func updateWhenIsSelected() {
+        
+    }
+    
+    func updateWhenIsDeselected() {
+        if operation.selectable {
+            customTitleLabel.textColor = operation.buttonType.selectedTintColor
+            imageView?.tintColor = operation.buttonType.selectedTintColor
+            backgroundColor = operation.buttonType.selectedBackgroundColor
+        } else {
+            customTitleLabel.textColor = operation.buttonType.tintColor
+            imageView?.tintColor = operation.buttonType.tintColor
+            backgroundColor = operation.buttonType.backgroundColor
+        }
+    }
+    
+    func createAnimatorBasedIsSelected() {
+        animator = isSelected ?
+            createAnimator(with: updateWhenIsSelected) :
+            createAnimator(with: updateWhenIsDeselected)
+    }
+    
+    func createAnimator(with animation: (() -> Void)?) -> UIViewPropertyAnimator {
+        return UIViewPropertyAnimator(duration: 0.5, curve: .easeOut, animations: animation)
+    }
+    
+}
+
+
+

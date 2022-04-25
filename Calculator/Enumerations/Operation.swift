@@ -87,6 +87,15 @@ enum Operation: String {
         }
     }
     
+    var selectable: Bool {
+        switch self {
+        case .divide, .multiply, .minus, .plus, .twoNd, .xY, .sqrtY, .ee:
+            return true
+        default:
+            return false
+        }
+    }
+    
 }
 
 

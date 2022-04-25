@@ -13,6 +13,7 @@ class ResultView: UIView {
         let label = UILabel()
         label.text = "0"
         label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -27,7 +28,7 @@ class ResultView: UIView {
     }
     
     func setupResultLabel() {
-        resultLabel.font = .systemFont(ofSize: K.Numeric.resultLabelFontSize, weight: .light)
+        resultLabel.font = .monospacedDigitSystemFont(ofSize: K.Numeric.resultLabelFontSize, weight: .light)
     }
     
 }
