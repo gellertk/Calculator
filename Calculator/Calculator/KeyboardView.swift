@@ -166,7 +166,7 @@ class KeyboardView: UIView {
 extension KeyboardView: KeyboardViewDelegate {
     
     func didSelectButton(_ button: CalculatorButton) {
-        allSubviews(of: CalculatorButton.self)
+        allSubviews(of: CalculatorButton.self).first { $0 != button && $0.isSelected }?.isSelected = false
     }
     
 }

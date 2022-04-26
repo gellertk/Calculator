@@ -20,7 +20,7 @@ class CalculatorButton: UIButton {
     
     override var isSelected: Bool {
         didSet {
-            //createAnimatorBasedIsSelected()
+            handleBasedIsSelected()
             if isSelected {
                 delegate?.didSelectButton(self)
             }
@@ -73,8 +73,6 @@ class CalculatorButton: UIButton {
         customTitleLabel.font = operation.buttonType.font
         if operation.buttonType == .engineering {
             isHidden = Orientation.isPortrait
-        } else if operation.buttonType != .number {
-            setImage(operation.buttonImage, for: .normal)
         }
         
         if !isZeroButton {
@@ -103,13 +101,10 @@ private extension CalculatorButton {
     
     func setTitle(_ title: String?) {
         
-        if operation.buttonType == .number
-            || operation == .reset {
+        if let title = title {
             customTitleLabel.text = title
-        } else if operation.buttonType == .engineering {
-            customTitleLabel.text = operation.buttonTitle
         } else {
-            setImage(operation.buttonImage, for: .normal)
+            customTitleLabel.text = operation.buttonTitle
         }
         
     }
@@ -129,7 +124,13 @@ private extension CalculatorButton {
     }
     
     @objc func didTouchUp() {
-        createAnimator()
+        if operation.isDeselectable {
+            isSelected.toggle()
+        } else if operation.isSelectable, !isSelected {
+            isSelected = true
+        } else {
+            createAnimator()
+        }
     }
     
     func handleBasedIsSelected() {
@@ -145,19 +146,18 @@ private extension CalculatorButton {
     }
     
     func updateWhenIsSelected() {
-        
-    }
-    
-    func updateWhenIsDeselected() {
-        if operation.selectable {
+        if operation.isSelectable || operation.isDeselectable {
             customTitleLabel.textColor = operation.buttonType.selectedTintColor
-            imageView?.tintColor = operation.buttonType.selectedTintColor
             backgroundColor = operation.buttonType.selectedBackgroundColor
         } else {
             customTitleLabel.textColor = operation.buttonType.tintColor
-            imageView?.tintColor = operation.buttonType.tintColor
             backgroundColor = operation.buttonType.backgroundColor
         }
+    }
+    
+    func updateWhenIsDeselected() {
+        customTitleLabel.textColor = operation.buttonType.tintColor
+        backgroundColor = operation.buttonType.backgroundColor
     }
     
     func createAnimatorBasedIsSelected() {

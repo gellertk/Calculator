@@ -70,7 +70,7 @@ enum ButtonType {
         case .selfAction:
             fontSize = K.Numeric.portraitButtonWidthHeight / 2.3
         case .action:
-            fontSize = K.Numeric.portraitButtonWidthHeight / 2
+            fontSize = K.Numeric.portraitButtonWidthHeight / 1.5
         case .engineering:
             fontSize = K.Numeric.portraitButtonWidthHeight / 3.2
         }

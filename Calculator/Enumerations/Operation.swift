@@ -10,13 +10,13 @@ import UIKit
 enum Operation: String {
     
     case reset
-    case plusMinus = "plus.forwardslash.minus"
-    case percent
-    case divide
-    case multiply
-    case minus
-    case plus
-    case equal
+    case plusMinus = "⁺∕₋"
+    case percent = "％"
+    case divide = "÷"
+    case multiply = "×"
+    case minus = "-"
+    case plus = "+"
+    case equal = "="
     case number
     case leftBracket = "("
     case rightBracket = ")"
@@ -53,27 +53,6 @@ enum Operation: String {
         return rawValue
     }
     
-    var buttonImage: UIImage {
-        
-        var config: UIImage.SymbolConfiguration
-        
-        if Orientation.isPortrait {
-            if self.buttonType == .selfAction {
-                config = UIImage.SymbolConfiguration(pointSize: K.Numeric.portraitButtonWidthHeight / 2.8, weight: .semibold)
-            } else {
-                config = UIImage.SymbolConfiguration(pointSize: K.Numeric.portraitButtonWidthHeight / 2.5, weight: .bold)
-            }
-        } else {
-            if self.buttonType == .selfAction {
-                config = UIImage.SymbolConfiguration(pointSize: K.Numeric.portraitButtonWidthHeight / 2.8 / 1.5, weight: .semibold)
-            } else {
-                config = UIImage.SymbolConfiguration(pointSize: K.Numeric.portraitButtonWidthHeight / 2.5 / 1.5, weight: .bold)
-            }
-        }
-        
-        return UIImage(systemName: buttonTitle, withConfiguration: config) ?? UIImage()
-    }
-    
     var buttonType: ButtonType {
         switch self {
         case .reset, .plusMinus, .percent:
@@ -87,9 +66,18 @@ enum Operation: String {
         }
     }
     
-    var selectable: Bool {
+    var isSelectable: Bool {
         switch self {
-        case .divide, .multiply, .minus, .plus, .twoNd, .xY, .sqrtY, .ee:
+        case .divide, .multiply, .minus, .plus, .xY, .sqrtY, .ee:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var isDeselectable: Bool {
+        switch self {
+        case .twoNd:
             return true
         default:
             return false
