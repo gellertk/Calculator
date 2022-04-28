@@ -11,10 +11,16 @@ struct K {
     
     struct Color {
         
-        static let actionButtonBackground = color(from: "#ff9400")
-        static let selfActionButtonBackground = color(from: "#a6a6a6")
-        static let numberButtonBackground = color(from: "#333333")
-        static let engineerButtonBackground = color(from: "#212121")
+        static let actionButtonBackground: UIColor = .init(red: 255, green: 148, blue: 0)
+        static let selfActionButtonBackground: UIColor = .init(red: 116, green: 116, blue: 116)
+        static let numberButtonBackground: UIColor = .init(red: 51, green: 51, blue: 51)
+        static let engineerButtonBackground: UIColor = .init(red: 33, green: 33, blue: 33)
+
+        static let numberAndEngineeringButtonHighlited: UIColor = .init(red: 115, green: 115, blue: 115)
+        static let selfActionButtonHighlited: UIColor = .init(red: 217, green: 217, blue: 217)
+        static let actionButtonHighlited: UIColor = .init(red: 251, green: 199, blue: 141)
+        
+        static let engineeringButtonSelected: UIColor = .init(red: 77, green: 77, blue: 77)
 
         static let selfActionButtonTitle: UIColor = .black
         static let buttonTitle: UIColor = .white

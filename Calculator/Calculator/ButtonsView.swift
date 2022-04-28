@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol KeyboardViewDelegate: AnyObject {
-    func didSelectButton(_ button: CalculatorButton)
-}
-
-class KeyboardView: UIView {
-            
+class ButtonsView: UIView {
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        return superview
+    }
+    
     private var firstRowButtons: [UIView] = {
         
         return [CalculatorButton(operation: .leftBracket),
@@ -28,7 +28,7 @@ class KeyboardView: UIView {
     }()
     
     private var secondRowButtons: [UIView] = {
-
+        
         return [CalculatorButton(operation: .twoNd),
                 CalculatorButton(operation: .x2),
                 CalculatorButton(operation: .x3),
@@ -70,7 +70,7 @@ class KeyboardView: UIView {
     }()
     
     private var fifthRowButtons: [UIView] = {
-
+        
         let stackView1 = UIStackView(arrangedSubviews: [
             CalculatorButton(operation: .rad),
             CalculatorButton(operation: .sinh)
@@ -125,7 +125,7 @@ class KeyboardView: UIView {
         }
     }()
     
-    private lazy var buttonsStackView: UIStackView = {
+    lazy var buttonsStackView: UIStackView = {
         
         return UIStackView(arrangedSubviews: rowsStackView,
                            axis: .vertical,
@@ -136,7 +136,6 @@ class KeyboardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupView()
-        setupDelegates()
     }
     
     required init?(coder: NSCoder) {
@@ -144,9 +143,6 @@ class KeyboardView: UIView {
     }
     
     func setupButtonsStackView() {
-        
-        let allButtons: [CalculatorButton] = self.allSubviews(of: CalculatorButton.self)
-        
         buttonsStackView.spacing = K.Numeric.spacing
         for view in rowsStackView {
             view.spacing = K.Numeric.spacing
@@ -156,22 +152,14 @@ class KeyboardView: UIView {
             self.fifthRowButtons[row].isHidden = Orientation.isPortrait
         }
         
-        for button in allButtons {
+        for button in allCalculatorButtons {
             button.setup()
         }
     }
     
 }
 
-extension KeyboardView: KeyboardViewDelegate {
-    
-    func didSelectButton(_ button: CalculatorButton) {
-        allSubviews(of: CalculatorButton.self).first { $0 != button && $0.isSelected }?.isSelected = false
-    }
-    
-}
-
-private extension KeyboardView {
+private extension ButtonsView {
     
     func setupView() {
         backgroundColor = .black
@@ -187,12 +175,6 @@ private extension KeyboardView {
             buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
-    }
-    
-    func setupDelegates() {
-        allSubviews(of: CalculatorButton.self).forEach {
-            $0.delegate = self
-        }
     }
     
 }

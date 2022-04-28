@@ -29,14 +29,12 @@ enum ButtonType {
     
     var highlightedBackgroundColor: UIColor {
         switch self {
-        case .number:
-            return .init(red: 115, green: 115, blue: 115)
+        case .number, .engineering:
+            return K.Color.numberAndEngineeringButtonHighlited
         case .selfAction:
-            return .init(red: 217, green: 217, blue: 217)
+            return K.Color.selfActionButtonHighlited
         case .action:
-            return .init(red: 251, green: 199, blue: 141)
-        case .engineering:
-            return .init(red: 77, green: 77, blue: 77)
+            return K.Color.actionButtonHighlited
         }
     }
     
@@ -44,6 +42,8 @@ enum ButtonType {
         switch self {
         case .action:
             return .white
+        case .engineering:
+            return K.Color.engineeringButtonSelected
         default:
             return highlightedBackgroundColor
         }

@@ -33,6 +33,10 @@ extension UIView {
         return all
     }
     
+    var allCalculatorButtons: [CalculatorButton] {
+        return allSubviews(of: CalculatorButton.self) as [CalculatorButton]
+    }
+    
 }
 
 

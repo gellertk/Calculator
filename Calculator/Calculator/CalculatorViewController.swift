@@ -9,6 +9,8 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
+    private var selectedButtons: [CalculatorButton] = []
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
@@ -21,13 +23,29 @@ class CalculatorViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        calculatorView.setupLayout()
+        calculatorView.setupConstraints()
     }
     
 }
 
 extension CalculatorViewController: CalculatorViewDelegate {
     
-    
-    
+    func sendSelectedButton(_ button: CalculatorButton) {
+        if button.operation.isDeselectable {
+            button.isSelected.toggle()
+        } else if button.operation.isSelectable {
+            button.isSelected = true
+        }
+        
+//        if button.isSelected {
+//            selectedButtons.forEach({
+//                $0.isSelected = false
+//            })
+//            if !selectedButtons.contains(button) {
+//                selectedButtons.append(button)
+//            }
+//        }
+        
+    }
+
 }

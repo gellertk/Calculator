@@ -28,7 +28,7 @@ class ResultView: UIView {
     }
     
     func setupResultLabel() {
-        resultLabel.font = .monospacedDigitSystemFont(ofSize: K.Numeric.resultLabelFontSize, weight: .light)
+        resultLabel.font = .systemFont(ofSize: K.Numeric.resultLabelFontSize, weight: .light)
     }
     
 }

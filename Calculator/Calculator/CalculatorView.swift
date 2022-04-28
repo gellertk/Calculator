@@ -8,38 +8,40 @@
 import UIKit
 
 protocol CalculatorViewDelegate: AnyObject {
-    
+    func sendSelectedButton(_ button: CalculatorButton)
 }
 
 class CalculatorView: UIView {
     
-    weak var delegate: CalculatorViewDelegate?
-    
-    private var resultView = ResultView()
-    private var keyboardView = KeyboardView()
-    
     private lazy var portraitConstraint = [
         resultView.topAnchor.constraint(equalTo: topAnchor),
         resultView.leadingAnchor.constraint(equalTo: leadingAnchor),
-        resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 5),
-        resultView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 7),
+        resultView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 5),
+        resultView.bottomAnchor.constraint(equalTo: buttonsView.topAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 7),
         
-        keyboardView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 3.5),
-        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 2)
+        buttonsView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 3.5),
+        buttonsView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 2)
     ]
     
     private lazy var landscapeConstraints = [
         resultView.topAnchor.constraint(equalTo: topAnchor),
-        resultView.bottomAnchor.constraint(equalTo: keyboardView.topAnchor),
+        resultView.bottomAnchor.constraint(equalTo: buttonsView.topAnchor),
         resultView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-        resultView.trailingAnchor.constraint(equalTo: keyboardView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 4),
+        resultView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 4),
         resultView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2),
         
-        keyboardView.topAnchor.constraint(equalTo: resultView.bottomAnchor),
-        keyboardView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-        keyboardView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-        keyboardView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+        buttonsView.topAnchor.constraint(equalTo: resultView.bottomAnchor),
+        buttonsView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+        buttonsView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+        buttonsView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
     ]
+    
+    private var buttonTracked: CalculatorButton?
+    
+    weak var delegate: CalculatorViewDelegate?
+    
+    private var resultView = ResultView()
+    private var buttonsView = ButtonsView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,25 +52,35 @@ class CalculatorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupLayout() {
-        setupConstraints()
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        handleSubviewWhenTouchBegan(buttonsView.buttonsStackView,
+                                    point: touches.first?.location(in: buttonsView.buttonsStackView),
+                                    event: event)
     }
     
-}
-
-private extension CalculatorView {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        handleSubviewWhenTouchMoved(buttonsView.buttonsStackView,
+                                    point: touches.first?.location(in: buttonsView.buttonsStackView),
+                                    event: event)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let oldbutton = buttonTracked {
+            setupButtonAsSelected(oldbutton)
+        }
+    }
     
     func setupView() {
         backgroundColor = .black
         addSubviews([resultView,
-                     keyboardView])
+                     buttonsView])
         setupConstraints()
     }
     
     func setupConstraints() {
         
         UIView.animate(withDuration: 0.2) { [weak self] in
-            self?.keyboardView.setupButtonsStackView()
+            self?.buttonsView.setupButtonsStackView()
             self?.resultView.setupResultLabel()
         }
         
@@ -82,4 +94,46 @@ private extension CalculatorView {
         
     }
     
+}
+
+private extension CalculatorView {
+    
+    func handleSubviewWhenTouchBegan(_ subview: UIView, point: CGPoint?, event: UIEvent?) {
+        guard let point = point else {
+            return
+        }
+        if let subview = subview.hitTest(point, with: event),
+           let button = subview as? CalculatorButton {
+            setupButtonAsSwipedIn(button)
+        }
+    }
+    
+    func handleSubviewWhenTouchMoved(_ subview: UIView, point: CGPoint?, event: UIEvent?) {
+        guard let point = point else {
+            return
+        }
+        if let subview = subview.hitTest(point, with: event),
+           let button = subview as? CalculatorButton {
+            if let oldbutton = buttonTracked, oldbutton != button {
+                setupButtonAsSwipedOut(oldbutton)
+            } else {
+                setupButtonAsSwipedIn(button)
+            }
+        }
+    }
+    
+    func setupButtonAsSwipedOut(_ button: CalculatorButton) {
+        button.sendActions(for: .touchDragExit)
+        buttonTracked = nil
+    }
+    
+    func setupButtonAsSwipedIn(_ button: CalculatorButton) {
+        button.sendActions(for: .touchDragEnter)
+        buttonTracked = button
+    }
+    
+    func setupButtonAsSelected(_ button: CalculatorButton) {
+        button.sendActions(for: .touchUpInside)
+        delegate?.sendSelectedButton(button)
+    }
 }

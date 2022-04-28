@@ -5,7 +5,7 @@
 //  Created by Кирилл  Геллерт on 13.04.2022.
 //
 
-import UIKit
+import Foundation
 
 enum Operation: String {
     
@@ -83,6 +83,15 @@ enum Operation: String {
             return false
         }
     }
+    
+//    var relatedOperationForDeselect: [Operation: [Operation]] {
+//        switch self {
+//        case <#pattern#>:
+//            <#code#>
+//        default:
+//            <#code#>
+//        }
+//    }
     
 }
 

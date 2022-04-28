@@ -9,7 +9,7 @@ import UIKit
 
 class CalculatorButton: UIButton {
     
-    var operation: Operation = .equal
+    var operation: Operation!
     
     private lazy var widthPortraitConstraint = widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
     private lazy var heightPortraitConstraint = heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
@@ -21,16 +21,11 @@ class CalculatorButton: UIButton {
     override var isSelected: Bool {
         didSet {
             handleBasedIsSelected()
-            if isSelected {
-                delegate?.didSelectButton(self)
-            }
         }
     }
     
     private var animator = UIViewPropertyAnimator()
-    
-    weak var delegate: KeyboardViewDelegate?
-    
+        
     private lazy var customTitleLabel: UILabel = {
         let label = UILabel()
         label.font = operation.buttonType.font
@@ -100,13 +95,11 @@ private extension CalculatorButton {
     }
     
     func setTitle(_ title: String?) {
-        
         if let title = title {
             customTitleLabel.text = title
         } else {
             customTitleLabel.text = operation.buttonTitle
         }
-        
     }
     
     func setupTargets() {
@@ -124,13 +117,7 @@ private extension CalculatorButton {
     }
     
     @objc func didTouchUp() {
-        if operation.isDeselectable {
-            isSelected.toggle()
-        } else if operation.isSelectable, !isSelected {
-            isSelected = true
-        } else {
-            createAnimator()
-        }
+        createAnimator()
     }
     
     func handleBasedIsSelected() {
