@@ -14,10 +14,11 @@ class ResultView: UIView {
         label.text = "0"
         label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .right
         
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -29,6 +30,10 @@ class ResultView: UIView {
     
     func setupResultLabel() {
         resultLabel.font = .systemFont(ofSize: K.Numeric.resultLabelFontSize, weight: .light)
+    }
+    
+    func setResult(_ result: String) {
+        resultLabel.text = result
     }
     
 }
@@ -44,7 +49,8 @@ private extension ResultView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             resultLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+            resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor)
         ])
     }
     

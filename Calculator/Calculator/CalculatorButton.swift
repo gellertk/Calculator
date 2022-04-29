@@ -76,6 +76,10 @@ class CalculatorButton: UIButton {
         }
     }
     
+    func getLabelValue() -> String {
+        return customTitleLabel.text ?? ""
+    }
+    
 }
 
 private extension CalculatorButton {

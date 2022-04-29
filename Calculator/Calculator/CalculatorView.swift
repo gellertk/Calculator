@@ -15,7 +15,7 @@ class CalculatorView: UIView {
     
     private lazy var portraitConstraint = [
         resultView.topAnchor.constraint(equalTo: topAnchor),
-        resultView.leadingAnchor.constraint(equalTo: leadingAnchor),
+        resultView.leadingAnchor.constraint(equalTo: buttonsView.leadingAnchor, constant: K.Numeric.portraitButtonWidthHeight / 5),
         resultView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 5),
         resultView.bottomAnchor.constraint(equalTo: buttonsView.topAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 7),
         
@@ -40,7 +40,7 @@ class CalculatorView: UIView {
     
     weak var delegate: CalculatorViewDelegate?
     
-    private var resultView = ResultView()
+    var resultView = ResultView()
     private var buttonsView = ButtonsView()
     
     override init(frame: CGRect) {

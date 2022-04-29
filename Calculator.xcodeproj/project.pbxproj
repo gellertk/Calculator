@@ -19,6 +19,7 @@
 		CB9067162806E5C500B42643 /* CalculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9067152806E5C500B42643 /* CalculatorButton.swift */; };
 		CB90671B2806EEBC00B42643 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671A2806EEBC00B42643 /* UIStackView+Extension.swift */; };
 		CB90671F280724E000B42643 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB90671E280724E000B42643 /* UIView+Extension.swift */; };
+		CBB9890F281BECD900F0FC5F /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB9890E281BECD900F0FC5F /* Double+Extension.swift */; };
 		CBD6F25028131A860032AB73 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD6F24F28131A860032AB73 /* Orientation.swift */; };
 		CBD6F25228131BFF0032AB73 /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD6F25128131BFF0032AB73 /* ButtonType.swift */; };
 		CBDC84FB28100BA300043157 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDC84FA28100BA300043157 /* ButtonsView.swift */; };
@@ -40,6 +41,7 @@
 		CB9067152806E5C500B42643 /* CalculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButton.swift; sourceTree = "<group>"; };
 		CB90671A2806EEBC00B42643 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		CB90671E280724E000B42643 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		CBB9890E281BECD900F0FC5F /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		CBD6F24F28131A860032AB73 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		CBD6F25128131BFF0032AB73 /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
 		CBDC84FA28100BA300043157 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				CB90671E280724E000B42643 /* UIView+Extension.swift */,
+				CBB9890E281BECD900F0FC5F /* Double+Extension.swift */,
 				CB1A66382816F9C600A2E4CB /* UIColor+Extension.swift */,
 				CB90671A2806EEBC00B42643 /* UIStackView+Extension.swift */,
 			);
@@ -228,6 +231,7 @@
 				CBD6F25028131A860032AB73 /* Orientation.swift in Sources */,
 				CB90670D2806DBE400B42643 /* Constant.swift in Sources */,
 				CB90670F2806DE8D00B42643 /* Operation.swift in Sources */,
+				CBB9890F281BECD900F0FC5F /* Double+Extension.swift in Sources */,
 				CB9067162806E5C500B42643 /* CalculatorButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -84,6 +84,17 @@ enum Operation: String {
         }
     }
     
+    var buttonShouldDeselectOther: Bool {
+        switch self {
+        case _ where isSelectable:
+            return true
+        case .number:
+            return true
+        default:
+            return false
+        }
+    }
+    
 //    var relatedOperationForDeselect: [Operation: [Operation]] {
 //        switch self {
 //        case <#pattern#>:
