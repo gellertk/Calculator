@@ -13,6 +13,10 @@ class CalculatorButton: UIButton {
     
     private lazy var widthPortraitConstraint = widthAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
     private lazy var heightPortraitConstraint = heightAnchor.constraint(equalToConstant: K.Numeric.portraitButtonWidthHeight)
+    private lazy var zeroButtonLabelPortraitConstraint = customTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                               constant: K.Numeric.portraitButtonWidthHeight / 2.5)
+    private lazy var zeroButtonLabelLandscapeConstraint = customTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                               constant: K.Numeric.portraitButtonWidthHeight / 3)
     
     private var isZeroButton: Bool {
         customTitleLabel.text == "0" ? true : false
@@ -70,7 +74,10 @@ class CalculatorButton: UIButton {
             isHidden = Orientation.isPortrait
         }
         
-        if !isZeroButton {
+        if isZeroButton {
+            zeroButtonLabelPortraitConstraint.isActive = Orientation.isPortrait
+            zeroButtonLabelLandscapeConstraint.isActive = Orientation.isLandscape
+        } else {
             heightPortraitConstraint.isActive = Orientation.isPortrait
             widthPortraitConstraint.isActive = Orientation.isPortrait
         }
@@ -92,10 +99,19 @@ private extension CalculatorButton {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
-            customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-        ])
+        
+        if operation.buttonType == .action {
+            NSLayoutConstraint.activate([
+                customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 30),
+                customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                customTitleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+                customTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+        }
+        
     }
     
     func setTitle(_ title: String?) {

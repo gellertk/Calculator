@@ -23,11 +23,18 @@ extension Double {
     }
     
     var cleanAndSpaced: String {
-        let spaced = self.truncatingRemainder(dividingBy: 1) == 0 ? Double(String(format: "%.0f", self)) : Double(String(self))
-        guard let spaced = spaced else {
-            return ""
+        if self.truncatingRemainder(dividingBy: 1) == 0,
+           let spaced = Double(String(format: "%.0f", self)) {
+            let number = NSNumber(value: spaced)
+            
+            return Double.valueFormatter.string(from: number) ?? ""
+        } else {
+            return String(self)
         }
-        let number = NSNumber(value: spaced)
+    }
+    
+    var spaced: String {
+        let number = NSNumber(value: self)
         return Double.valueFormatter.string(from: number) ?? ""
     }
     

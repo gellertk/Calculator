@@ -19,7 +19,7 @@ class CalculatorView: UIView {
         resultView.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 5),
         resultView.bottomAnchor.constraint(equalTo: buttonsView.topAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 7),
         
-        buttonsView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 3.5),
+        buttonsView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 4),
         buttonsView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -K.Numeric.portraitButtonWidthHeight / 2)
     ]
     

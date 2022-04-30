@@ -15,7 +15,7 @@ class CalculatorViewController: UIViewController {
     
     private var selectedButtons: [CalculatorButton] = []
     private var currentButton: CalculatorButton!
-        
+    
     private var secondOperand: Double?
     private var firstOperand: Double?
     private var storedOperation: Operation?
@@ -102,10 +102,13 @@ extension CalculatorViewController: CalculatorViewDelegate {
     }
     
     func concatenate() {
-        if result == 0 || startTyping {
+        if currentButton.getLabelValue() == "," {
+            addComma()
+        } else if resultString.hasSuffix(".") {
+            result = Double("\(result.clean)\(currentButton.getLabelValue())") ?? 0
+            //result = result + Double(currentButton.getLabelValue())! / pow(10, Double(String(result).count - 2))
+        } else if result == 0 || startTyping {
             result = Double(currentButton.getLabelValue()) ?? 0
-        } else if currentButton.getLabelValue() == "," {
-           addComma()
         } else {
             result = Double("\(result.clean)\(currentButton.getLabelValue())") ?? 0
         }
@@ -117,7 +120,7 @@ extension CalculatorViewController: CalculatorViewDelegate {
               let secondOperand = secondOperand else {
             return
         }
-                
+        
         switch storedOperation {
         case .divide:
             result = firstOperand / secondOperand
@@ -135,7 +138,7 @@ extension CalculatorViewController: CalculatorViewDelegate {
     }
     
     func addComma() {
-        resultString = "\(result)"
+        resultString = String(String(result).dropLast())
         calculatorView.resultView.setResult(resultString)
     }
     

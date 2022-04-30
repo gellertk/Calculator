@@ -144,7 +144,7 @@ class ButtonsView: UIView {
     
     func setupButtonsStackView() {
         buttonsStackView.spacing = K.Numeric.spacing
-        for view in rowsStackView {
+        for view in allSubviews(of: UIStackView.self) {
             view.spacing = K.Numeric.spacing
         }
         

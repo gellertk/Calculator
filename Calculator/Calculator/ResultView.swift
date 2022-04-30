@@ -33,7 +33,7 @@ class ResultView: UIView {
     }
     
     func setResult(_ result: String) {
-        resultLabel.text = result
+        resultLabel.text = result.replacingOccurrences(of: ".", with: ",")
     }
     
 }
