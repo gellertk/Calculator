@@ -1,6 +1,6 @@
 # Calculator
 
-**Repeat native calculator iOS app**
+**Clone of native calculator iOS**
 
 * No Storyboard
 * Landscape mode
