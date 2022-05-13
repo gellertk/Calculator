@@ -1,6 +1,6 @@
 # Calculator
 
-***Clone of native iOS calculator***
+***Clone of native iOS Calculator***
 
 **General**
 * No Storyboard
