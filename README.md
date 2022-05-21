@@ -3,6 +3,7 @@
 ***Clone of native iOS Calculator***
 
 **General**
+* MVC
 * No Storyboard
 * Autolayout
 * Landscape mode
